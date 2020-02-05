@@ -1,0 +1,12 @@
+{
+  "name": "adapt-csre-timer",
+  "version": "1.1.1",
+  "framework": ">=2.2",
+  "displayName": "Course Timer",
+  "extension": "courseTimer",
+  "description": "Timing feature for courses.",
+  "main": "/js/adapt-csre-timer.js",
+  "keywords": ["adapt-plugin", "adapt-extension"],
+  "license": "GPLv3",
+  "targetAttribute": "_courseTimer"
+}

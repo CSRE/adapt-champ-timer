@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "required": false,
+  "globals": {
+    "timeLeftInCourse": {
+      "type": "string",
+      "required": true,
+      "default": "The required amount of time has not passed for this module. You are encourage to review the module until the timer is complete.",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    }
+  },
+  "properties": {
+    "pluginLocations": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "config": {
+          "type": "object",
+          "properties": {
+            "_courseTimer": {
+              "type": "object",
+              "required": false,
+              "legend": "Course Timer Settings",
+              "properties": {
+                "_isEnabled": {
+                  "type": "boolean",
+                  "required": true,
+                  "title": "Enabled",
+                  "default": true,
+                  "inputType": {"type": "Boolean", "options": [false, true]}
+                },
+                "_requiredTime": {
+                  "type": "number",
+                  "required": false,
+                  "default": "0",
+                  "title": "Minutes",
+                  "inputType": {"type": "Text"},
+                  "validators": ["number"],
+                  "help": "Required time for course in minutes."
+                }
+              }
+            }
+          }
+        },
+        "course": {
+          "type": "object"
+        },
+        "contentobject": {
+          "type": "object"
+        },
+        "article": {
+          "type": "object"
+        },
+        "block": {
+          "type": "object"
+        },
+        "component": {
+          "type": "object",
+          "properties": {
+            "_courseTimer": {
+              "type": "object",
+              "required": false,
+              "legend": "Next Button for Course Timer",
+              "properties": {
+                "_nextButtonContainer": {
+                  "type": "boolean",
+                  "required": false,
+                  "title": "Navigate to Next Module or Quiz",
+                  "default": false,
+                  "inputType": {
+                    "type": "Boolean",
+                    "options": [
+                      false,
+                      true
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

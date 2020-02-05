@@ -1,0 +1,10 @@
+// config.json
+"_courseTimer": {
+  "_isEnabled": true,
+  "_requiredTime": 1
+}
+
+// component.json - where the button needs to appear.
+"_courseTimer": {
+  "_nextButtonContainer": true
+}
