@@ -1,10 +1,10 @@
-define(['core/js/adapt', './nextButtonView', './countdownView', './helpers', './timer'], function(
-  Adapt,
-  NextButtonView,
-  CountdownView,
-  helpers
-) {
-
+define([
+  'core/js/adapt',
+  './nextButtonView',
+  './countdownView',
+  './helpers',
+  './timer'
+], function(Adapt, NextButtonView, CountdownView, helpers) {
   /**
    * Data model for plug-in
    */
@@ -52,7 +52,7 @@ define(['core/js/adapt', './nextButtonView', './countdownView', './helpers', './
 
         try {
           scormAPI = require('extensions/adapt-contrib-spoor/js/scorm');
-          // window.SCORMAPI_TEST = scormAPI;
+          window.SCORMAPI_TEST = scormAPI; // TODO: Comment out in production
         } catch (e) {
           console.warn('Unable to load SCORM API:', e);
           return this.setErr();
@@ -91,7 +91,7 @@ define(['core/js/adapt', './nextButtonView', './countdownView', './helpers', './
       },
 
       /**
-       * Listen for component renders and check to see if 
+       * Listen for component renders and check to see if
        * it has been tagged as a next button container.
        */
       componentPostRender: function(view) {
@@ -104,7 +104,9 @@ define(['core/js/adapt', './nextButtonView', './countdownView', './helpers', './
       },
 
       attemptQuizNavigation: function() {
-        console.log('Attempting to navigate to quiz.');
+        if (this.timerModel.get('timerComplete')) {
+          window.API.LMSRedirect('adv');
+        }
       }
     },
     Backbone.Events
@@ -114,4 +116,3 @@ define(['core/js/adapt', './nextButtonView', './countdownView', './helpers', './
 
   return CourseTimer;
 });
-

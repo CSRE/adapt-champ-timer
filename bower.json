@@ -1,6 +1,6 @@
 {
   "name": "adapt-csre-timer",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "framework": ">=2.2",
   "displayName": "Course Timer",
   "extension": "courseTimer",
@@ -8,5 +8,6 @@
   "main": "/js/adapt-csre-timer.js",
   "keywords": ["adapt-plugin", "adapt-extension"],
   "license": "GPLv3",
-  "targetAttribute": "_courseTimer"
+  "targetAttribute": "_courseTimer",
+  "homepage": "https://github.com/CSRE/adapt-champ-timer"
 }
