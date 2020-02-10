@@ -1,13 +1,11 @@
 {
-  "name": "adapt-csre-timer",
-  "version": "1.2.0",
-  "framework": ">=2.2",
-  "displayName": "Course Timer",
-  "extension": "courseTimer",
-  "description": "Timing feature for courses.",
-  "main": "/js/adapt-csre-timer.js",
-  "keywords": ["adapt-plugin", "adapt-extension"],
-  "license": "GPLv3",
-  "targetAttribute": "_courseTimer",
-  "homepage": "https://github.com/CSRE/adapt-champ-timer"
+  "name": "adapt-champ-timer",
+  "version": "1.0.0",
+  "framework": ">=2",
+  "displayName": "Champions Timer Component",
+  "component": "timer",
+  "description": "A timer component that locks course until both timer and all previous content have been completed.",
+  "main": "/js/adapt-champ-timer.js",
+  "keywords": ["adapt-plugin", "adapt-component"],
+  "license": "unlicensed"
 }

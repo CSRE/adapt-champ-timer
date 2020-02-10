@@ -1,9 +1,12 @@
 {{#if error}}
 <p class="countdown__error">
-  The timer for this module could not be loaded and you will not be able to move forward in the course. Please contact support to report the error.
+  The timer for this module could not be loaded and you will not be able to move forward in the course. Please contact
+  support to report the error.
 </p>
 {{else}}
 <p class="countdown__display">{{{remainingTime}}}</p>
 <p class="countdown__message">Time Remaining in Module</p>
-<button class="countdown__navigate button" {{#unless timerComplete}}disabled{{/unless}}>Take Chapter Quiz</button>
+<button class="countdown__navigate button" id="quiz-btn" {{#unless courseComplete}}disabled{{/unless}}>
+  Take Chapter Quiz
+</button>
 {{/if}}
