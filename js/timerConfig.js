@@ -1,4 +1,4 @@
-define(['core/js/adapt'], function(Adapt) {
+define(['core/js/adapt', 'libraries/moment'], function(Adapt, moment) {
   function getTimerConfig() {
     var timerConfig = {};
 
@@ -17,6 +17,21 @@ define(['core/js/adapt'], function(Adapt) {
     scormAPI = require('extensions/adapt-contrib-spoor/js/scorm');
     timerConfig.START_TIME = scormAPI.startTime;
     timerConfig.PREVIOUS_TIME = scormAPI.getValue('cmi.core.total_time');
+
+    /**
+     * Update target time to account for previous time
+     * completed or set full time in milliseconds.
+     */
+    if (timerConfig.PREVIOUS_TIME !== 'undefined') {
+      var prevDuration = moment.duration(timerConfig.PREVIOUS_TIME);
+
+      timerConfig.TARGET_TIME = moment
+        .duration(timerConfig.REQUIRED_TIME, 'minutes')
+        .subtract(prevDuration)
+        .as('seconds');
+    } else {
+      timerConfig.TARGET_TIME = parseInt(timerConfig.REQUIRED_TIME, 10) * 60;
+    }
 
     // Set env
     var devTools = Adapt.config.get('_devtools');

@@ -28,48 +28,43 @@ define([
 
     initialize: function() {
       this.listenTo(Adapt, {
-        'app:dataReady': this._timerSetup,
-        'courseTimer:clickNext': this._onNext
-      });
-
-      this.listenTo(Adapt.course, {
-        'change:_isComplete': this._onCourseComplete
+        'app:dataReady': this._timerSetup
       });
     },
 
-    /**
-     * Start a new timer
-     */
     _timerSetup: function() {
-      /**
-       * Configure timer from component,
-       * spoor and devtools settings.
-       */
+      // Make sure configuration loads properly before setting listeners
       try {
         _.extend(this, getTimerConfig());
       } catch (e) {
         return this.set({ error: true });
       }
 
-      /**
-       * Update target time to account for previous time
-       * completed or set full time in milliseconds.
-       */
-      if (this.PREVIOUS_TIME !== 'undefined') {
-        var prevDuration = moment.duration(this.PREVIOUS_TIME);
+      // Setup listeners
+      this._setupListeners();
 
-        this.TARGET_TIME = moment
-          .duration(this.REQUIRED_TIME, 'minutes')
-          .subtract(prevDuration)
-          .as('seconds');
-      } else {
-        this.TARGET_TIME = parseInt(this.REQUIRED_TIME, 10) * 60;
-      }
+      // Start timer
+      this._startTimer();
+    },
 
-      /**
-       * Start timer and save interval id so it can be
-       * cleared once the timer has completed.
-       */
+    _setupListeners: function() {
+      // Listen for course advance button
+      this.listenTo(Adapt, {
+        'courseTimer:clickNext': this._onNext
+      });
+
+      // Listen for when course is completed
+      this.listenTo(Adapt.course, {
+        'change:_isComplete': this._stopTimer
+      });
+
+      // Listen for timer start event
+      this.listenTo(this, {
+        'change:timerComplete': this._stopTimer
+      });
+    },
+
+    _startTimer: function() {
       this.INTERVAL_ID = setInterval(this._onInterval.bind(this), 1000);
     },
 
@@ -90,13 +85,13 @@ define([
       this.set('remainingTime', formatDuration(remainingTime));
 
       if (remainingTime <= 0) {
-        this._stopTimer();
+        this.set('timerComplete', true);
       }
     },
 
     _stopTimer: function() {
       clearInterval(this.INTERVAL_ID);
-      this.set('timerComplete', true);
+      this.set('remainingTime', 0);
 
       if (Adapt.course.get('_isComplete')) {
         this._onCourseComplete();
@@ -105,7 +100,11 @@ define([
 
     _onNext: function() {
       if (Adapt.course.get('_isComplete')) {
-        window.API.LMSRedirect('adv');
+        if (window.API && window.API.LMSRedirect) {
+          window.API.LMSRedirect('adv');
+        } else {
+          console.warn('LMS API not available.');
+        }
       } else {
         var timerWarning = {
           title: 'Incomplete Course Requirements',
@@ -124,11 +123,6 @@ define([
     },
 
     _onCourseComplete: function() {
-      if (!this.attributes.timerComplete) {
-        this._stopTimer();
-      }
-
-      // TODO: See if they are on last component or not first
       var timerNotify = {
         title: 'Course Requirements Complete',
         body:
