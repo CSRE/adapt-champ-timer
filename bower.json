@@ -1,8 +1,8 @@
 {
   "name": "adapt-champ-timer",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "framework": ">=2",
-  "displayName": "Champions Timer Component",
+  "displayName": "CSRE - Timer Component",
   "component": "timer",
   "description": "A timer component that locks course until both timer and all previous content have been completed.",
   "main": "/js/adapt-champ-timer.js",

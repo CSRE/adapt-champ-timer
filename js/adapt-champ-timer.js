@@ -37,6 +37,7 @@ define([
       try {
         _.extend(this, getTimerConfig());
       } catch (e) {
+        console.warn(e);
         return this.set({ error: true });
       }
 
