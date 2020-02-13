@@ -92,7 +92,10 @@ define([
 
     _stopTimer: function() {
       clearInterval(this.INTERVAL_ID);
-      this.set('remainingTime', 0);
+      this.set({
+        remainingTime: 0,
+        timerComplete: true
+      });
 
       if (Adapt.course.get('_isComplete')) {
         this._onCourseComplete();
