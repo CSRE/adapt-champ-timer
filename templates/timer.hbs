@@ -17,7 +17,11 @@
         <div class="{{_component}}-body-inner component-body-inner">
           {{{compile_a11y_text body this}}}
           <button class="button next-btn__btn">
-            Continue to Chapter Quiz
+            {{#if buttonText}}
+            {{{compile buttonText this}}}
+            {{else}}
+            Continue Course
+            {{/if}}
           </button>
         </div>
       </div>

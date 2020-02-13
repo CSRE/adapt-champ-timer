@@ -1,6 +1,6 @@
 {
   "name": "adapt-champ-timer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "framework": ">=2",
   "displayName": "CSRE - Timer Component",
   "component": "timer",

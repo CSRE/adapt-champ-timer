@@ -1,5 +1,5 @@
 {
-  "type":"object",
+  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
   "$ref": "http://localhost/plugins/content/component/model.schema",
@@ -13,11 +13,15 @@
       "translatable": true
     }
   },
-  "properties":{
+  "properties": {
     "_supportedLayout": {
       "type": "string",
       "required": true,
-      "enum": ["full-width", "half-width", "both"],
+      "enum": [
+        "full-width",
+        "half-width",
+        "both"
+      ],
       "default": "both",
       "editorOnly": true
     },
@@ -36,8 +40,20 @@
       "default": 1,
       "title": "Required Time",
       "inputType": "Number",
-      "validators": ["required", "number"],
+      "validators": [
+        "required",
+        "number"
+      ],
       "help": "Time required for the module in minutes."
+    },
+    "buttonText": {
+      "type": "string",
+      "required": false,
+      "default": "Continue Course",
+      "title": "Button Text",
+      "inputType": "Text",
+      "help": "Text for the button that will navigate to next course component.",
+      "translatable": true
     }
   }
 }
